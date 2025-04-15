@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Telurku Sayang - Login & Registrasi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/img/logotelur.png" type="image/png">
   <style>
     body {
       margin: 0;
@@ -126,9 +127,36 @@
     #ownerName {
       margin-top: 1rem;
     }
+
+    .logo {
+      position: absolute;
+      top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .logo h1 {
+      font-size: 24px;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
   </style>
 </head>
 <body>
+  <div class="logo">
+    <img src="assets/img/logotelur.png" alt="Logo" />
+    <h1>telurku | sayang</h1>
+  </div>
+  
   <div class="container">
     <h2 id="form-title">Login</h2>
     <form id="auth-form" novalidate>
@@ -198,10 +226,10 @@
         }
 
         const newUser = { email, password, ownerName };
-          users.push(newUser);
-          localStorage.setItem('users', JSON.stringify(users));
-          showPopup(true, 'Registrasi sukses! Telurmu siap menetas! 🐣✨');
-          setTimeout(() => {
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        showPopup(true, 'Registrasi sukses! Telurmu siap menetas! 🐣✨');
+        setTimeout(() => {
           toggleForm(); 
           closePopup(); 
         }, 1500);
