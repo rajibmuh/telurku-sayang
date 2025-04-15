@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" id="home">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- FAVICON -->
+    <link rel="icon" href="assets/img/logotelur.png" type="image/x-icon"/>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Font Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <title>telurku | sayang</title>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="container">
+          <div class="box-navbar">
+            <div class="logo">
+              <img src="assets/img/logotelur.png" alt="Logo" style="width: 50px; vertical-align: middle; margin-right: 10px;" />
+              <h1 style="display: inline-block; font-size: 24px;">telurku | sayang</h1>
+            </div>            
+            <ul class="menu">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#telur">Telur</a></li>
+              <li><a href="keranjang.html">Keranjang</a></li>
+              <li class="active"><a href="#hubungi">Hubungi</a></li>
+              <li><button onclick="logout()" class="menu-btn logout-btn">Logout</button></li>
+            </ul>
+            <i class="fa-solid fa-bars menu-bar"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero">
+        <div class="container">
+          <div class="box-hero">
+            <div class="box">
+              <h1>
+                Telur Segar Terbaik<br />
+                Langsung dari Peternakan ke Rumah Anda
+              </h1>
+              <p>
+                Belanja telur berkualitas tanpa ribet. Ayo pesan sekarang dan rasakan kesegarannya!
+              </p>                          
+              <a href="keranjang.html" class="btn">Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Services -->
+    <div class="services" id="services">
+      <div class="container">
+        <div class="box-services">
+          <div class="box">
+            <i class="fa-solid fa-coins"></i>
+            <h4>Harga Terjangkau</h4>
+            <p>Kami menyediakan berbagai jenis telur seperti telur ayam, bebek, ayam kampung, puyuh, angsa, dan telur asin dengan harga yang bersaing dan ramah di kantong.</p>
+          </div>
+          <div class="box">
+            <i class="fa-solid fa-certificate"></i>
+            <h4>Sudah Tersertifikasi</h4>
+            <p>Telur yang kami jual berasal dari peternakan terpercaya dan telah melewati proses seleksi serta uji kelayakan agar tetap segar dan higienis.</p>
+          </div>
+          <div class="box">
+            <i class="fa-solid fa-people-roof"></i>
+            <h4>Aman dan Ramah</h4>
+            <p>Layanan kami mengutamakan kenyamanan pelanggan, dengan pengemasan yang aman dan pelayanan ramah agar setiap pembelian jadi menyenangkan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Services -->
+
+
+    <!-- telur -->
+<div class="telur" id="telur">
+  <div class="container">
+    <div class="box-telur">    
+      <div class="box">
+        <img src="assets/img/telurayam.jpeg" alt="" />
+        <h3>Telur Ayam</h3>
+        <p>Telur ayam segar dan bergizi, cocok untuk berbagai hidangan sehari-hari.</p>
+        <button onclick="showReviews('telurAyam')">Ulasan</button>
+      </div>
+      <div class="box">
+        <img src="assets/img/telurayamkampung.jpg" alt="" />
+        <h3>Telur Ayam Kampung</h3>
+        <p>Telur ayam kampung dengan kandungan nutrisi lebih tinggi dan rasa lebih gurih.</p>
+        <button onclick="showReviews('telurAyamKampung')">Ulasan</button>
+      </div>
+      <div class="box">
+        <img src="assets/img/telurbebek.jpg" alt="" />
+        <h3>Telur Bebek</h3>
+        <p>Telur bebek kaya protein dan sering digunakan untuk pembuatan telur asin.</p>
+        <button onclick="showReviews('telurBebek')">Ulasan</button>
+      </div>
+      <div class="box">
+        <img src="assets/img/telurangsa.jpg" alt="" />
+        <h3>Telur Angsa</h3>
+        <p>Telur angsa lebih besar dengan tekstur unik dan rasa khas.</p>
+        <button onclick="showReviews('telurAngsa')">Ulasan</button>
+      </div>
+      <div class="box">
+        <img src="assets/img/telurasin.jpg" alt="" />
+        <h3>Telur Asin</h3>
+        <p>Telur bebek yang diawetkan dengan garam, menghasilkan rasa gurih dan lezat.</p>
+        <button onclick="showReviews('telurAsin')">Ulasan</button>
+      </div>
+      <div class="box">
+        <img src="assets/img/telurpuyuh.jpg" alt="" />
+        <h3>Telur Puyuh</h3>
+        <p>Telur kecil dengan kandungan gizi tinggi, cocok untuk camilan sehat.</p>
+        <button onclick="showReviews('telurPuyuh')">Ulasan</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- telur -->
+  <!-- Review Container -->
+    <div id="reviews" class="review-container">
+      <h2>Ulasan</h2>
+      <div id="reviewContent"></div>
+      <button class="button" onclick="hideReviews()">Tutup</button>
+    </div>
+
+  <!-- Hubungi -->
+<div class="hubungi" id="hubungi">
+  <div class="container">
+    <div class="box-hubungi">
+      <h1 class="pulse">
+        📞 Hubungi Kami <br />
+        Pesan Telur Segar Sekarang!
+      </h1>
+      <h3 class="pulse">Klik Salah Satu Tombol di Bawah Ini:</h3>
+
+      <div class="contact-buttons">
+        <!-- Tombol WhatsApp -->
+        <a href="https://wa.me/6281262527231?text=Halo%20min,%20saya%20mau%20pesan%20telur" target="blank" class="btn wa">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+
+        <!-- Tombol Email -->
+        <a href="mailto:rajmuh186@gmail.com" target="blank" class="btn email">
+          <i class="fa-regular fa-envelope"></i> Email
+        </a>
+        
+        <!-- Tombol Shopee -->
+        <a href="http://shopee.co.id/eightyegg" target="blank" class="btn shopee">
+          <i class="fa-solid fa-cart-shopping"></i> Shopee
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Hubungi -->
+
+
+  <!-- Footer -->
+<div class="footer">
+  <div class="container">
+    <div class="box-footer">
+      <div class="box">
+        <h2>TelurFresh</h2>
+        <p>Kami menyediakan berbagai jenis telur segar berkualitas seperti telur ayam, bebek, kampung, puyuh, angsa, hingga telur asin. Harga bersahabat dan pengiriman cepat ke rumah Anda!</p>
+      </div>
+      <div class="box">
+        <h3>Menu</h3>
+        <a href="#home">Home</a>
+        <a href="#services">Layanan</a>
+        <a href="#telur">Telur</a>
+        <a href="#keranjang.html">Keranjang</a>
+        <a href="#hubungi">Hubungi</a>
+        <button onclick="logout()" class="menu-btn">Logout</button>
+      </div>
+      <div class="box">
+        <p>&copy; 2025 <span>TelurFresh</span> - Semua Hak Dilindungi. Medan, Indonesia</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+
+<script>
+  const reviews = {
+    telurAyam: [
+      { name: "Ayu Putri", comment: "Telur ayam yang sangat segar dan enak!", img: "assets/img/ulasan1.jpg" },
+      { name: "Anto Setiawan", comment: "Kualitas telur ayamnya sangat baik!", img: "assets/img/ulasan2.jpg" }
+    ],
+    telurAyamKampung: [
+      { name: "Budi Santoso", comment: "Rasa telur ayam kampung ini sangat gurih!", img: "assets/img/ulasan3.jpg" },
+      { name: "Rina Dewi", comment: "Sangat puas dengan kualitasnya!", img: "assets/img/ulasan4.png" }
+    ],
+    telurBebek: [
+      { name: "Murni Sari", comment: "Telur bebeknya enak dan kaya protein!", img: "assets/img/ulasan5.png" },
+      { name: "Andika Prasetyo", comment: "Suka sekali dengan telur bebek ini!", img: "assets/img/ulasan6.jpg" }
+    ],
+    telurAngsa: [
+      { name: "Ririn Anugrah", comment: "Telur angsa ini sangat lezat!", img: "assets/img/ulasan7.jpg" },
+      { name: "Fitria Sari", comment: "Rasa dan teksturnya unik!", img: "assets/img/ulasan8.jpg" }
+    ],
+    telurAsin: [
+      { name: "Asni Novri", comment: "Telur asin yang sangat gurih!", img: "assets/img/ulasan9.jpg" },
+      { name: "Desi Lestari", comment: "Sangat merekomendasikan telur asin ini!", img: "assets/img/ulasan10.jpeg" }
+    ],
+    telurPuyuh: [
+      { name: "Ardina Sinta", comment: "Telur puyuhnya sangat lezat!", img: "assets/img/ulasan11.jpg" },
+      { name: "Siti Aminah", comment: "Camilan sehat yang enak!", img: "assets/img/ulasan12.png" }
+    ]
+  };
+
+  function showReviews(product) {
+    const reviewContent = document.getElementById('reviewContent');
+    reviewContent.innerHTML = '';
+    reviews[product].forEach(review => {
+      reviewContent.innerHTML += `
+        <div class="review">
+          <img src="${review.img}" alt="${review.name}" />
+          <h4>${review.name}</h4>
+          <p>"${review.comment}"</p>
+        </div>
+      `;
+    });
+    document.getElementById('reviews').style.display = 'block'; 
+  }
+
+  function hideReviews() {
+    document.getElementById('reviews').style.display = 'none'; 
+  }
+
+  const menuBar = document.querySelector('.menu-bar');
+const menu = document.querySelector('.navbar .menu');
+
+menuBar.addEventListener('click', () => {
+  menu.classList.toggle('menu-active');
+});
+
+  if (localStorage.getItem('isLoggedIn') !== 'true') {
+    window.location.href = "auth.html"; 
+  }
+
+  function logout() {
+    localStorage.removeItem('isLoggedIn');
+    window.location.href = "auth.html";
+  }
+  function logout() {
+    localStorage.removeItem('isLoggedIn');
+    window.location.href = "auth.html";
+  }
+  window.onload = function() {
+  if (localStorage.getItem('isLoggedIn') === 'true') {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    const userName = user.ownerName || "Pengguna";
+
+    const nav = document.querySelector('.menu');
+    const greet = document.createElement('li');
+    greet.innerHTML = `<span>Halo, ${userName}</span>`;
+    nav.insertBefore(greet, nav.firstChild); 
+  }
+};
+
+</script>
+
+    <script src="dist/js/script.js"></script>
+  </body>
+</html>
