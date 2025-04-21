@@ -6,6 +6,7 @@
     <link rel="icon" href="assets/img/logotelur.png" type="image/x-icon"/>
     <title>Keranjang Belanja Telur</title>
     <style>
+        /* Gaya yang ada sebelumnya */
         body {
             font-family: 'Arial', sans-serif;
             background: #fff8e1;
@@ -63,6 +64,7 @@
             transition: background-color 0.3s, transform 0.3s;
         }
         .button:hover {
+            background-color: #e68a;
             background-color: #e68a00;
             transform: scale(1.05);
         }
@@ -147,6 +149,13 @@
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .history {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -199,7 +208,11 @@
         <button class="button" onclick="openWhatsApp()">Pesan Sekarang</button>
         <button class="button" onclick="goHome()">Kembali ke Home</button>
     </div>
-    <!-- Modal untuk mengumpulkan informasi pengguna -->
+    <div class="history">
+        <h2>Riwayat Belanja</h2>
+        <div id="purchaseHistory"></div>
+    </div>
+    
     <div id="userInfoModal" class="modal">
         <div class="modal-content">
             <h3>Informasi Pengiriman</h3>
@@ -216,6 +229,7 @@
     <script>
         let cart = [];
         let total = 0;
+        let purchaseHistory = [];
 
         function addToCart(productName, price) {
             const existingProduct = cart.find(item => item.name === productName);
@@ -256,7 +270,6 @@
             }
             document.getElementById('userInfoModal').style.display = 'flex';
         }
-
         function closeModal() {
             document.getElementById('userInfoModal').style.display = 'none';
         }
@@ -278,9 +291,30 @@
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             closeModal();
+
+            purchaseHistory.push({
+                date: new Date().toLocaleString(),
+                total: total,
+                items: cart.map(item => `${item.name} (x${item.quantity})`).join(', ')
+            });
+
+            updatePurchaseHistory();
+
             cart = [];
             total = 0;
             updateCart();
+        }
+
+        function updatePurchaseHistory() {
+            const purchaseHistoryDiv = document.getElementById('purchaseHistory');
+            purchaseHistoryDiv.innerHTML = '';
+            purchaseHistory.forEach((purchase, index) => {
+                purchaseHistoryDiv.innerHTML += `
+                    <div>
+                        <strong>Pesanan ${index + 1}:</strong> ${purchase.items} - Total: Rp ${purchase.total} pada ${purchase.date}
+                    </div>
+                `;
+            });
         }
 
         function goHome() {
