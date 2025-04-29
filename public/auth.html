@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Telurku Sayang - Login & Registrasi</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="assets/img/logotelur.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="assets/img/logotelur.png" type="image/png" />
   <style>
     body {
       margin: 0;
@@ -40,13 +40,14 @@
       position: relative;
     }
 
-    input {
+    input, select {
       width: 100%;
       padding: 10px;
       padding-right: 40px;
       border: 1px solid #ccc;
       border-radius: 10px;
       box-sizing: border-box;
+      font-size: 14px;
     }
 
     .toggle-password {
@@ -148,7 +149,6 @@
       color: white;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     }
-
   </style>
 </head>
 <body>
@@ -181,6 +181,8 @@
 
   <script>
     let isLogin = true;
+    const adminEmail = "admin@telurku.com";
+    const adminPassword = "admin123";
     let users = JSON.parse(localStorage.getItem('users')) || [];
 
     function toggleForm() {
@@ -197,6 +199,7 @@
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
       const ownerName = document.getElementById('ownerName').value.trim();
+      const role = document.getElementById('role').value;
 
       if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
         showPopup(false, 'Emailmu kayak telur retak... nggak valid! 😅');
@@ -209,13 +212,19 @@
           showPopup(false, 'Waduh! Telurmu salah masuk sarang, coba lagi yaa 🐣');
           return;
         }
+
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('currentUser', JSON.stringify(foundUser));
         window.redirectAfterLogin = true;
         showPopup(true, 'Login sukses! Yuk mulai belanja telur disini! 🥳');
       } else {
+        if (role === "admin") {
+          showPopup(false, 'Kamu tidak bisa daftar sebagai admin 😅');
+          return;
+        }
+
         if (!ownerName) {
-          showPopup(false, 'Namamu belum diisi, telurmu bingung siapa majikannya 😅');
+          showPopup(false, 'Namamu belum diisi 😅');
           return;
         }
 
@@ -266,7 +275,8 @@
 
     window.onload = function() {
       if (localStorage.getItem('isLoggedIn') === 'true') {
-        window.location.href = "index.html";
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        window.location.href = user.role === 'admin' ? 'admin.html' : 'index.html';
       }
     }
   </script>

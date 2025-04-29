@@ -1,325 +1,398 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="assets/img/logotelur.png" type="image/x-icon"/>
-    <title>Keranjang Belanja Telur</title>
-    <style>
-        /* Gaya yang ada sebelumnya */
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #fff8e1;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-        .header {
-            text-align: center;
-            padding: 20px;
-            background-color: #ff9800;
-            color: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            border-bottom: 5px solid #e68a00;
-        }
-        .notification {
-            margin: 10px 0;
-            font-weight: bold;
-            color: #d32f2f;
-        }
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-        }
-        .product {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            margin: 15px;
-            padding: 20px;
-            text-align: center;
-            width: 250px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .product:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-        }
-        .product img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 15px;
-        }
-        .button {
-            background-color: #ff9800;
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .button:hover {
-            background-color: #e68a;
-            background-color: #e68a00;
-            transform: scale(1.05);
-        }
-        .cart {
-            margin: 20px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        .total {
-            font-weight: bold;
-            margin-top: 10px;
-            color: #ff9800;
-        }
-        @media (max-width: 600px) {
-            .product {
-                width: 90%;
-            }
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            justify-content: center;
-            align-items: center;
-            font-family: 'Segoe UI', sans-serif;
-        }
-        .modal-content {
-            background: #fff;
-            padding: 30px 25px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            animation: fadeIn 0.3s ease;
-        }
-        .modal-content h3 {
-            margin-bottom: 20px;
-            color: #ff9800;
-        }
-        .modal-content input {
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 10px 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 14px;
-        }
-        .modal-content input[readonly] {
-            background-color: #f7f7f7;
-            color: #555;
-        }
-        .modal-content .button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 5px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 15px;
-        }
-        .modal-content .button:first-of-type {
-            background-color: #ff9800;
-            color: white;
-        }
-        .modal-content .button:last-of-type {
-            background-color: #f44336;
-            color: white;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .history {
-            margin: 20px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="assets/img/logotelur.png" type="image/x-icon"/>
+  <title>Keranjang Belanja - Telurku Sayang</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fefae0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #e68a00;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .navigation {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .button {
+      background-color: #e68a00;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .button:hover {
+      background-color: #cc7a00;
+    }
+
+    .notification {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 1.1em;
+      color: #444;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .product {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      width: 220px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .product img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .product h3 {
+      margin: 10px 0 5px;
+      color: #e68a00;
+    }
+
+    .product p {
+      margin: 5px 0 15px;
+      color: #e68a00;
+      font-weight: bold;
+    }
+
+    .cart, .history {
+      background-color: #fff;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 700px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .cart h2, .history h2 {
+      margin-top: 0;
+      color: #e68a00;
+      text-align: center;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+
+    .total {
+      font-weight: bold;
+      margin-top: 15px;
+      font-size: 1.2em;
+      text-align: right;
+      color: #e68a00;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .history-item {
+      background-color: #f9f9f9;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border-left: 4px solid #e68a00;
+    }
+
+    .empty-message {
+      text-align: center;
+      color: #999;
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Keranjang Belanja Telur</h1>
-        <div class="notification" id="notification">Anda memiliki 0 item di keranjang</div>
+  <div class="header">
+    <h1>Keranjang Belanja - Telurku Sayang</h1>
+    <div class="notification" id="notification">Anda memiliki 0 item di keranjang</div>
+  </div>
+
+  <div class="navigation">
+    <button class="button" onclick="goHome()">Kembali ke Home</button>
+  </div>
+
+  <div id="productContainer" class="product-container"></div>
+
+  <div class="cart">
+    <h2>Keranjang Anda</h2>
+    <div id="cartItems"></div>
+    <div class="total" id="totalPrice">Total: Rp 0</div>
+    <button class="button" onclick="openWhatsApp()">Pesan Sekarang</button>
+  </div>
+
+  <div class="history">
+    <h2>Riwayat Belanja</h2>
+    <div id="purchaseHistory"></div>
+  </div>
+
+  <div id="userInfoModal" class="modal">
+    <div class="modal-content">
+      <h3>Informasi Pengiriman</h3>
+      <input type="text" id="userName" placeholder="Nama Lengkap" required>
+      <input type="text" id="userAddress" placeholder="Alamat Lengkap" required>
+      <input type="text" id="userPhone" placeholder="Nomor HP" required>
+      <input type="text" id="danaAccount" placeholder="Nomor Dana Anda" required>
+      <input type="text" id="ownerDanaAccount" value="081262527231" readonly>
+      <p>Silakan kirim bukti transfer Anda melalui WhatsApp setelah mengklik tombol di bawah ini.</p>
+      <button class="button" onclick="sendToWhatsApp()">Kirim ke WhatsApp</button>
+      <button class="button" onclick="closeModal()">Batal</button>
     </div>
-    <div class="product-container">
-        <div class="product">
-            <img src="assets/img/telurayam.jpeg" alt="Telur Ayam" />
-            <h3>Telur Ayam</h3>
-            <p>Harga: Rp 28.000 per kilogram</p>
-            <button class="button" onclick="addToCart('Telur Ayam', 28000)">Tambah ke Keranjang</button>
-        </div>
-        <div class="product">
-            <img src="assets/img/telurayamkampung.jpg" alt="Telur Ayam Kampung" />
-            <h3>Telur Ayam Kampung</h3>
-            <p>Harga: Rp 35.500 per kilogram</p>
-            <button class="button" onclick="addToCart('Telur Ayam Kampung', 35500)">Tambah ke Keranjang</button>
-        </div>
-        <div class="product">
-            <img src="assets/img/telurbebek.jpg" alt="Telur Bebek" />
-            <h3>Telur Bebek</h3>
-            <p>Harga: Rp 36.000 per kilogram</p>
-            <button class="button" onclick="addToCart('Telur Bebek', 36000)">Tambah ke Keranjang</button>
-        </div>
-        <div class="product">
-            <img src="assets/img/telurangsa.jpg" alt="Telur Angsa" />
-            <h3>Telur Angsa</h3>
-            <p>Harga: Rp 150.000 per kilogram</p>
-            <button class="button" onclick="addToCart('Telur Angsa', 150000)">Tambah ke Keranjang</button>
-        </div>
-        <div class="product">
-            <img src="assets/img/telurasin.jpg" alt="Telur Asin" />
-            <h3>Telur Asin</h3>
-            <p>Harga: Rp 45.000 per kilogram</p>
-            <button class="button" onclick="addToCart('Telur Asin', 45000)">Tambah ke Keranjang</button>
-        </div>
-        <div class="product">
-            <img src="assets/img/telurpuyuh.jpg" alt="Telur Puyuh" />
-            <h3>Telur Puyuh</h3>
-            <p>Harga: Rp 40.000 per kilogram</p>
-            <button class="button" onclick="addToCart('Telur Puyuh', 40000)">Tambah ke Keranjang</button>
-        </div>
-    </div>
-    <div class="cart">
-        <h2>Keranjang Anda</h2>
-        <div id="cartItems"></div>
-        <div class="total" id="totalPrice">Total: Rp 0</div>
-        <button class="button" onclick="openWhatsApp()">Pesan Sekarang</button>
-        <button class="button" onclick="goHome()">Kembali ke Home</button>
-    </div>
-    <div class="history">
-        <h2>Riwayat Belanja</h2>
-        <div id="purchaseHistory"></div>
-    </div>
-    
-    <div id="userInfoModal" class="modal">
-        <div class="modal-content">
-            <h3>Informasi Pengiriman</h3>
-            <input type="text" id="userName" placeholder="Nama Lengkap" required>
-            <input type="text" id="userAddress" placeholder="Alamat Lengkap" required>
-            <input type="text" id="userPhone" placeholder="Nomor HP" required>
-            <input type="text" id="danaAccount" placeholder="Nomor Dana Anda" required>
-            <input type="text" id="ownerDanaAccount" value="081262527231" readonly>
-            <p>Silakan kirim bukti transfer Anda melalui WhatsApp setelah mengklik tombol di bawah ini.</p>
-            <button class="button" onclick="sendToWhatsApp()">Kirim ke WhatsApp</button>
-            <button class="button" onclick="closeModal()">Batal</button>
-        </div>
-    </div>
-    <script>
-        let cart = [];
-        let total = 0;
-        let purchaseHistory = [];
+  </div>
 
-        function addToCart(productName, price) {
-            const existingProduct = cart.find(item => item.name === productName);
-            if (existingProduct) {
-                existingProduct.quantity += 1;
-            } else {
-                cart.push({ name: productName, price: price, quantity: 1 });
-            }
-            total += price;
-            updateCart();
-        }
+  <script>
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
 
-        function updateCart() {
-            const cartItemsDiv = document.getElementById('cartItems');
-            cartItemsDiv.innerHTML = '';
-            cart.forEach((item, index) => {
-                cartItemsDiv.innerHTML += `
-                    <div class="cart-item">
-                        <span>${item.name} (x${item.quantity}) - Rp ${item.price * item.quantity}</span>
-                        <button class="button" onclick="removeFromCart(${index})">Hapus</button>
-                    </div>
-                `;
-            });
-            document.getElementById('totalPrice').innerText = `Total: Rp ${total}`;
-            document.getElementById('notification').innerText = `Anda memiliki ${cart.length} item di keranjang`;
-        }
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let total = calculateTotal();
+    let purchaseHistory = JSON.parse(localStorage.getItem('purchaseHistory')) || [];
 
-        function removeFromCart(index) {
-            total -= cart[index].price * cart[index].quantity;
-            cart.splice(index, 1);
-            updateCart();
-        }
+    function calculateTotal() {
+      return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    }
 
-        function openWhatsApp() {
-            if (cart.length === 0) {
-                alert("Keranjang Anda kosong!");
-                return;
-            }
-            document.getElementById('userInfoModal').style.display = 'flex';
-        }
-        function closeModal() {
-            document.getElementById('userInfoModal').style.display = 'none';
-        }
+    window.onload = function () {
+      let products = JSON.parse(localStorage.getItem('products')) || [
+        { id: 1, name: "Telur Ayam (10 butir)", price: 25000 , unit: "10 butir", image: "assets/img/telurayam.jpeg" },
+        { id: 2, name: "Telur Ayam Kampung (10 butir)", price: 35000, unit: "10 butir", image: "assets/img/telurayamkampung.jpg" },
+        { id: 3, name: "Telur Bebek (10 butir)", price: 40000, unit: "10 butir", image: "assets/img/telurbebek.jpg" },
+        { id: 4, name: "Telur Angsa (10 butir)", price: 150000, unit: "10 butir", image: "assets/img/telurangsa.jpg" },
+        { id: 5, name: "Telur Asin (1 butir)", price: 5000, unit: "1 butir", image: "assets/img/telurasin.jpg" },
+        { id: 6, name: "Telur Puyuh (10 butir)", price: 10000, unit: "10 butir", image: "assets/img/telurpuyuh.jpg" },
+        { id: 7, name: "Telur Dino (1 butir)", price: 80000, unit: "1 butir", image: "assets/img/telurdino.jpg" }
+      ];
 
-        function sendToWhatsApp() {
-            const name = document.getElementById('userName').value;
-            const address = document.getElementById('userAddress').value;
-            const phone = document.getElementById('userPhone').value;
-            const danaAccountNumber = document.getElementById('danaAccount').value;
-            const ownerDanaAccount = document.getElementById('ownerDanaAccount').value;
+      localStorage.setItem('products', JSON.stringify(products));
+      syncCartWithProducts(products);
+      loadProducts();
+      updateCart();
+      updatePurchaseHistory();
+    };
 
-            if (!name || !address || !phone || !danaAccountNumber) {
-                alert("Silakan lengkapi semua informasi!");
-                return;
-            }
+    function syncCartWithProducts(products) {
+      const productNames = products.map(p => p.name);
+      cart = cart.filter(item => productNames.includes(item.name));
+      localStorage.setItem('cart', JSON.stringify(cart));
+      total = calculateTotal();
+    }
 
-            const message = `*Pesanan Baru*\nNama: ${name}\nAlamat: ${address}\nNomor HP: ${phone}\nNomor Akun Dana Anda: ${danaAccountNumber}\nNomor Akun Dana Pemilik Toko: ${ownerDanaAccount}\n\nDetail Pesanan:\n${cart.map(item => `${item.name} (x${item.quantity}) - Rp ${item.price * item.quantity}`).join('\n')}\nTotal: Rp ${total}\n\nSilakan kirim bukti transfer Anda setelah ini.`;
-            const whatsappNumber = '6281262527231';
-            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-            closeModal();
+    function loadProducts() {
+      const container = document.getElementById('productContainer');
+      container.innerHTML = '';
+      const products = JSON.parse(localStorage.getItem('products')) || [];
 
-            purchaseHistory.push({
-                date: new Date().toLocaleString(),
-                total: total,
-                items: cart.map(item => `${item.name} (x${item.quantity})`).join(', ')
-            });
+      if (products.length === 0) {
+        container.innerHTML = '<div class="empty-message">Tidak ada produk tersedia.</div>';
+        return;
+      }
 
-            updatePurchaseHistory();
+      products.forEach(product => {
+        const jumlahButir = parseInt(product.unit.match(/\d+/)?.[0]) || 1;
+        const hargaPerButir = Math.round(product.price / jumlahButir);
 
-            cart = [];
-            total = 0;
-            updateCart();
-        }
+        container.innerHTML += `
+          <div class="product">
+            <img src="${product.image}" alt="${product.name}" onerror="this.src='assets/img/placeholder.png'"/>
+            <h3>${product.name}</h3>
+            <p>Rp ${product.price.toLocaleString('id-ID')} / ${product.unit}</p>
+            <small style="color:gray;">Rp ${hargaPerButir.toLocaleString('id-ID')} per butir</small>
+            <br><br>
+            <button class="button" onclick="addToCart('${product.name}', ${product.price})">Tambah ke Keranjang</button>
+          </div>
+        `;
+      });
+    }
 
-        function updatePurchaseHistory() {
-            const purchaseHistoryDiv = document.getElementById('purchaseHistory');
-            purchaseHistoryDiv.innerHTML = '';
-            purchaseHistory.forEach((purchase, index) => {
-                purchaseHistoryDiv.innerHTML += `
-                    <div>
-                        <strong>Pesanan ${index + 1}:</strong> ${purchase.items} - Total: Rp ${purchase.total} pada ${purchase.date}
-                    </div>
-                `;
-            });
-        }
+    function addToCart(name, price) {
+      const item = cart.find(i => i.name === name);
+      if (item) item.quantity++;
+      else cart.push({ name, price, quantity: 1 });
 
-        function goHome() {
-            window.location.href = 'index.html';
-        }
-    </script>
+      total = calculateTotal();
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+    }
+
+    function updateCart() {
+      const div = document.getElementById('cartItems');
+      div.innerHTML = '';
+
+      if (cart.length === 0) {
+        div.innerHTML = '<div class="empty-message">Keranjang belanja kosong</div>';
+      } else {
+        cart.forEach((item, i) => {
+          div.innerHTML += `
+            <div class="cart-item">
+              <span>${item.name} (x${item.quantity}) - Rp ${(item.quantity * item.price).toLocaleString('id-ID')}</span>
+              <div>
+                <button class="button" onclick="changeQuantity(${i}, 1)">+</button>
+                <button class="button" onclick="changeQuantity(${i}, -1)">-</button>
+                <button class="button" onclick="removeFromCart(${i})">Hapus</button>
+              </div>
+            </div>`;
+        });
+      }
+
+      document.getElementById('totalPrice').innerText = `Total: Rp ${total.toLocaleString('id-ID')}`;
+      document.getElementById('notification').innerText = `Anda memiliki ${cart.length} item di keranjang`;
+    }
+
+    function changeQuantity(index, change) {
+      cart[index].quantity += change;
+      if (cart[index].quantity <= 0) removeFromCart(index);
+      else {
+        total = calculateTotal();
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCart();
+      }
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      total = calculateTotal();
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+    }
+
+    function openWhatsApp() {
+      if (cart.length === 0) {
+        alert("Keranjang belanja masih kosong!");
+        return;
+      }
+      document.getElementById('userInfoModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('userInfoModal').style.display = 'none';
+    }
+
+    function sendToWhatsApp() {
+      const name = document.getElementById('userName').value.trim();
+      const address = document.getElementById('userAddress').value.trim();
+      const phone = document.getElementById('userPhone').value.trim();
+      const dana = document.getElementById('danaAccount').value.trim();
+      const owner = document.getElementById('ownerDanaAccount').value;
+
+      if (!name || !address || !phone || !dana) {
+        alert("Harap lengkapi semua informasi pengiriman!");
+        return;
+      }
+
+      const msg = `*Pesanan Baru dari Telurku Sayang*\nNama: ${name}\nAlamat: ${address}\nNo HP: ${phone}\nDana Anda: ${dana}\nDana Pemilik: ${owner}\n\n*Detail Pesanan:*\n${cart.map(i => `${i.name} (x${i.quantity}) - Rp ${(i.price * i.quantity).toLocaleString('id-ID')}`).join('\n')}\n\n*Total: Rp ${total.toLocaleString('id-ID')}*\n\nTerima kasih telah berbelanja di Telurku Sayang!`;
+
+      const waLink = `https://api.whatsapp.com/send?phone=6281262527231&text=${encodeURIComponent(msg)}`;
+      window.open(waLink, '_blank');
+      closeModal();
+
+      purchaseHistory.push({
+        date: new Date().toLocaleString('id-ID'),
+        total,
+        items: cart.map(i => `${i.name} (x${i.quantity})`).join(', ')
+      });
+
+      localStorage.setItem('purchaseHistory', JSON.stringify(purchaseHistory));
+      updatePurchaseHistory();
+
+      cart = [];
+      total = 0;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+
+      alert("Pesanan berhasil dikirim! Silakan lakukan pembayaran dan kirim bukti transfer melalui WhatsApp.");
+    }
+
+    function updatePurchaseHistory() {
+      const history = document.getElementById('purchaseHistory');
+      history.innerHTML = '';
+
+      if (purchaseHistory.length === 0) {
+        history.innerHTML = '<div class="empty-message">Belum ada riwayat belanja.</div>';
+        return;
+      }
+
+      purchaseHistory.slice().reverse().forEach((p, i) => {
+        history.innerHTML += `
+          <div class="history-item">
+            <strong>Pesanan ${purchaseHistory.length - i}:</strong>
+            <div>${p.items}</div>
+            <div>Total: Rp ${p.total.toLocaleString('id-ID')}</div>
+            <div>Tanggal: ${p.date}</div>
+          </div>`;
+      });
+    }
+
+    function goHome() {
+      window.location.href = 'index.html';
+    }
+  </script>
 </body>
 </html>

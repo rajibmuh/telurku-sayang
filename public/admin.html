@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="assets/img/logotelur.png" type="image/x-icon"/>
+  <title>Admin Produk - Telurku Sayang</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fefae0;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-top: 50px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #bc6c25;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #ff9800;
+      color: #fff;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #ff9800;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .products {
+      max-width: 800px;
+      margin: 40px auto;
+    }
+
+    .product-card {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .product-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .product-info img {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+
+    .button-danger {
+      background-color: #d62828;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .button-danger:hover {
+      background-color: #a4161a;
+    }
+
+    .logout {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .logout button {
+      width: auto;
+      background-color: #999;
+    }
+    
+    .navigation {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .nav-button {
+      background-color: #dda15e;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+      width: auto;
+    }
+
+    .nav-button:hover {
+      background-color: #bc6c25;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="loginSection">
+    <h1>Login Admin</h1>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="username" />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="password" />
+    </div>
+    <button onclick="login()">Login</button>
+  </div>
+  
+  <div class="container hidden" id="adminSection">
+    <h2>Admin Produk - Telurku Sayang</h2>
+
+    <div class="form-group">
+      <label for="name">Nama Produk</label>
+      <input type="text" id="name" placeholder="Masukan Nama Produk" />
+    </div>
+    <div class="form-group">
+      <label for="price">Harga (Rp)</label>
+      <input type="number" id="price" placeholder="Masukan Harga" />
+    </div>
+    <div class="form-group">
+      <label for="unit">Satuan</label>
+      <input type="text" id="unit" placeholder="Masukan Beapa Butir" />
+    </div>
+    <div class="form-group">
+      <label for="image">Pilih Gambar</label>
+      <select id="image" class="image-select">
+        <option value="assets/img/telurayam.jpeg">Telur Ayam (10 butir)</option>
+        <option value="assets/img/telurayamkampung.jpg">Telur Ayam Kampung (10 butir)</option>
+        <option value="assets/img/telurbebek.jpg">Telur Bebek (10 butir)</option>
+        <option value="assets/img/telurangsa.jpg">Telur Angsa (10 butir)</option>
+        <option value="assets/img/telurasin.jpg">Telur Asin (1 butir)</option>
+        <option value="assets/img/telurpuyuh.jpg">Telur Puyuh (10 butir)</option>
+        <option value="assets/img/telurdino.jpg">Telur Dino (1 butir)</option>
+      </select>
+    </div>
+    <button onclick="addProduct()">Tambah Produk</button>
+
+    <div class="navigation">
+      <button class="nav-button" onclick="goToHome()">Lihat Toko</button>
+      <button class="nav-button" onclick="goToCart()">Lihat Keranjang</button>
+    </div>
+
+    <div class="logout">
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="products" id="productsList"></div>
+
+  <script>
+    const loginSection = document.getElementById('loginSection');
+    const adminSection = document.getElementById('adminSection');
+    const productsList = document.getElementById('productsList');
+
+    const defaultProducts = [
+      { id: 1, name: "Telur Ayam (10 butir)", price: 25000, unit: "10 butir", image: "assets/img/telurayam.jpeg" },
+      { id: 2, name: "Telur Ayam Kampung (10 butir)", price: 35000, unit: "10 butir", image: "assets/img/telurayamkampung.jpg" },
+      { id: 3, name: "Telur Bebek (10 butir)", price: 40000, unit: "10 butir", image: "assets/img/telurbebek.jpg" },
+      { id: 4, name: "Telur Angsa (10 butir)", price: 150000, unit: "10 butir", image: "assets/img/telurangsa.jpg" },
+      { id: 5, name: "Telur Asin (1 butir)", price: 5000, unit: "1 butir", image: "assets/img/telurasin.jpg" },
+      { id: 6, name: "Telur Puyuh (10 butir)", price: 10000, unit: "10 butir", image: "assets/img/telurpuyuh.jpg" },
+      { id: 7, name: "Telur Dino (1 butir)", price: 80000, unit: "1 butir", image: "assets/img/telurdino.jpg" }
+    ];
+
+    let products = JSON.parse(localStorage.getItem('products')) || defaultProducts;
+
+    function checkLogin() {
+      if (localStorage.getItem('isLoggedIn') === 'true') {
+        loginSection.classList.add('hidden');
+        adminSection.classList.remove('hidden');
+        loadProducts();
+      }
+    }
+
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      if (user === 'admin' && pass === 'admin') {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('products', JSON.stringify(products));
+        checkLogin();
+      } else {
+        alert("Username atau password salah!");
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('isLoggedIn');
+      location.reload();
+    }
+
+    function saveProducts() {
+      localStorage.setItem('products', JSON.stringify(products));
+    }
+
+    function addProduct() {
+      const name = document.getElementById('name').value.trim();
+      const price = parseInt(document.getElementById('price').value.trim());
+      const unit = document.getElementById('unit').value.trim();
+      const image = document.getElementById('image').value.trim(); 
+
+      if (!name || isNaN(price) || !unit || !image) {
+        alert("Isi semua data produk dengan benar!");
+        return;
+      }
+
+      const newProduct = {
+        id: Date.now(),
+        name,
+        price,
+        unit,
+        image
+      };
+
+      products.push(newProduct);
+      saveProducts();
+      loadProducts();
+
+      document.getElementById('name').value = '';
+      document.getElementById('price').value = '';
+      document.getElementById('unit').value = '';
+    }
+
+    function deleteProduct(id) {
+      if (confirm("Yakin ingin menghapus produk ini?")) {
+        const productToDelete = products.find(p => p.id === id);
+        
+        products = products.filter(p => p.id !== id);
+        saveProducts();
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (productToDelete) {
+          cart = cart.filter(item => item.name !== productToDelete.name);
+          localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        loadProducts();
+        alert("Produk berhasil dihapus dan juga dihapus dari keranjang!");
+      }
+    }
+
+    function loadProducts() {
+      productsList.innerHTML = '';
+      if (products.length === 0) {
+        productsList.innerHTML = '<p style="text-align:center;color:#999;">Belum ada produk</p>';
+        return;
+      }
+
+      products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <div class="product-info">
+            <img src="${product.image}" alt="${product.name}" onerror="this.src='assets/img/placeholder.png'"/>
+            <div>
+              <h3>${product.name}</h3>
+              <p>Rp ${product.price.toLocaleString('id-ID')} / ${product.unit || '-'}</p>
+            </div>
+          </div>
+          <div>
+            <button class="button-danger" onclick="deleteProduct(${product.id})">Hapus</button>
+          </div>
+        `;
+        productsList.appendChild(card);
+      });
+    }
+
+    function goToHome() {
+      window.location.href = 'index.html';
+    }
+
+    function goToCart() {
+      window.location.href = 'keranjang.html';
+    }
+
+    window.onload = checkLogin;
+  </script>
+</body>
+</html>
