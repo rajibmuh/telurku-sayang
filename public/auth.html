@@ -161,11 +161,18 @@
     <h2 id="form-title">Login</h2>
     <form id="auth-form" novalidate>
       <div class="form-group">
-        <input type="email" id="email" placeholder="Email" required>
+        <input type="email" id="email" placeholder="Email" required />
       </div>
       <div class="form-group">
         <input type="password" id="password" placeholder="Password" required>
         <span class="toggle-password" onclick="togglePassword()">👁️</span>
+      </div>
+      <div class="form-group" id="role-group">
+        <select id="role" required>
+          <option value="">Pilih sebagai...</option>
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
       </div>
       <input type="text" id="ownerName" placeholder="Nama Kamu" required style="display: none;" />
       <button type="submit" id="submit-btn">Masuk ke Telurku Sayang</button>
@@ -190,6 +197,7 @@
       document.getElementById('form-title').textContent = isLogin ? 'Login' : 'Registrasi';
       document.getElementById('submit-btn').textContent = isLogin ? 'Masuk ke Telurku Sayang' : 'Daftar Sekarang';
       document.getElementById('ownerName').style.display = isLogin ? 'none' : 'block';
+      document.getElementById('role-group').style.display = isLogin ? 'block' : 'none';
       document.querySelector('.toggle').textContent = isLogin ? 'Belum punya akun? Yuk registrasi dulu 🍳' : 'Sudah punya akun? Langsung login 🐣';
     }
 
@@ -207,6 +215,23 @@
       }
 
       if (isLogin) {
+        if (!role) {
+          showPopup(false, 'Pilih dulu ya login sebagai siapa 🍳');
+          return;
+        }
+
+        if (role === 'admin') {
+          if (email === adminEmail && password === adminPassword) {
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('currentUser', JSON.stringify({ email, role }));
+            window.redirectAfterLogin = true;
+            showPopup(true, 'Halo Admin! Login sukses 🥚✨');
+          } else {
+            showPopup(false, 'Login admin gagal! Cek email dan password-nya 🥲');
+          }
+          return;
+        }
+
         const foundUser = users.find(u => u.email === email && u.password === password);
         if (!foundUser) {
           showPopup(false, 'Waduh! Telurmu salah masuk sarang, coba lagi yaa 🐣');
@@ -214,7 +239,7 @@
         }
 
         localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('currentUser', JSON.stringify(foundUser));
+        localStorage.setItem('currentUser', JSON.stringify({ ...foundUser, role }));
         window.redirectAfterLogin = true;
         showPopup(true, 'Login sukses! Yuk mulai belanja telur disini! 🥳');
       } else {
@@ -269,7 +294,8 @@
     function closePopup() {
       document.getElementById('popup').classList.remove('show');
       if (window.redirectAfterLogin) {
-        window.location.href = "index.html";
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        window.location.href = user.role === 'admin' ? 'admin.html' : 'index.html';
       }
     }
 

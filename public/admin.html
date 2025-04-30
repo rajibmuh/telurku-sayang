@@ -175,7 +175,7 @@
         <option value="assets/img/telurayamkampung.jpg">Telur Ayam Kampung (10 butir)</option>
         <option value="assets/img/telurbebek.jpg">Telur Bebek (10 butir)</option>
         <option value="assets/img/telurangsa.jpg">Telur Angsa (10 butir)</option>
-        <option value="assets/img/telurasin.jpg">Telur Asin (1 butir)</option>
+        <option value="assets/img/telurasin.jpg">Telur Asin (10 butir)</option>
         <option value="assets/img/telurpuyuh.jpg">Telur Puyuh (10 butir)</option>
         <option value="assets/img/telurdino.jpg">Telur Dino (1 butir)</option>
       </select>
@@ -204,7 +204,7 @@
       { id: 2, name: "Telur Ayam Kampung (10 butir)", price: 35000, unit: "10 butir", image: "assets/img/telurayamkampung.jpg" },
       { id: 3, name: "Telur Bebek (10 butir)", price: 40000, unit: "10 butir", image: "assets/img/telurbebek.jpg" },
       { id: 4, name: "Telur Angsa (10 butir)", price: 150000, unit: "10 butir", image: "assets/img/telurangsa.jpg" },
-      { id: 5, name: "Telur Asin (1 butir)", price: 5000, unit: "1 butir", image: "assets/img/telurasin.jpg" },
+      { id: 5, name: "Telur Asin (10 butir)", price: 50000, unit: "1 butir", image: "assets/img/telurasin.jpg" },
       { id: 6, name: "Telur Puyuh (10 butir)", price: 10000, unit: "10 butir", image: "assets/img/telurpuyuh.jpg" },
       { id: 7, name: "Telur Dino (1 butir)", price: 80000, unit: "1 butir", image: "assets/img/telurdino.jpg" }
     ];
@@ -233,9 +233,8 @@
 
     function logout() {
       localStorage.removeItem('isLoggedIn');
-      location.reload();
+      window.location.href = 'auth.html'; 
     }
-
     function saveProducts() {
       localStorage.setItem('products', JSON.stringify(products));
     }
